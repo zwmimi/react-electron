@@ -2,6 +2,8 @@
   "name": "react-electron",
   "version": "0.1.0",
   "private": true,
+  "main": "public/electron.js",
+  "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -13,8 +15,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "react-start": "cross-env BROWSER=none react-scripts start",
+    "react-build": "react-scripts build",
+    "electron-start": "wait-on http://localhost:3000 && electron",
+    "electron-build": "electron-builder",
+    "start": "run-p react-start electron-start",
+    "build": "run-s react-build electron-build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
